@@ -4,16 +4,18 @@ from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-# ⚡ ADD YOUR LIVE VERCEL URL HERE TO PREVENT CORS ERRORS
+# Updated origins list with your exact Vercel URL
 origins = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
-    "https://vercel.app" 
+    "https://todo-list-phi-two-a9tfqkv5ee.vercel.app",
 ]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
+    # Regex allows all Vercel preview deployments to connect automatically
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -27,7 +29,7 @@ def init_db():
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             task TEXT NOT NULL,
             completed BOOLEAN NOT NULL DEFAULT 0
-            )
+        )
     """)
     conn.commit()
     conn.close()
