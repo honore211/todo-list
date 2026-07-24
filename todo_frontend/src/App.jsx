@@ -5,7 +5,7 @@ function App() {
   const [inputText, setInputText] = useState("")
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/tasks')
+    fetch('http://0.0.0.0:10000')
       .then(response => response.json())
       .then(data => {
         if (Array.isArray(data)) {
@@ -18,7 +18,7 @@ function App() {
 
   const addTask = () => {
     if (!inputText.trim()) return
-    fetch('http://127.0.0.1:8000/api/tasks', {
+    fetch('http://0.0.0.0:10000', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ function App() {
       .catch(error => console.error("error adding task:", error))
   }
 const deleteTask = (id) => {
-  fetch(`http://127.0.0.1:8000/api/tasks/${id}`, {
+  fetch(`http://0.0.0.0:10000`, {
     method: 'DELETE',
   })
   .then(response => response.json())
@@ -47,7 +47,7 @@ const deleteTask = (id) => {
 }
 
 const toggleTask = (id) => {
-  fetch(`http://127.0.0.1:8000/api/tasks/${id}/toggle`, {
+  fetch(`http://0.0.0.0:10000`, {
     method: 'PUT',
   })
     .then(response => response.json())
